@@ -1,0 +1,46 @@
+.card-container {
+  cursor: pointer;
+  padding: 0 6px 16px;
+  width: 235px;
+}
+
+.card-avatar-username {
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  height: 30px;
+}
+
+.card-avatar-username > img {
+  border-radius: 50%;
+  height: 25px;
+  margin-right: 10px;
+  object-fit: cover;
+  width: 25px;
+}
+
+.card-avatar-username > span {
+  color: #999;
+  font-size: 12px;
+}
+
+.card-container div:last-child img {
+  height: 360px;
+  object-fit: cover;
+  width: 235px;
+}
+
+.card-price-size-brand {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.card-price-size-brand span:first-child {
+  font-size: 14px;
+}
+
+.card-price-size-brand span:not(:first-child) {
+  color: #999;
+  font-size: 12px;
+}

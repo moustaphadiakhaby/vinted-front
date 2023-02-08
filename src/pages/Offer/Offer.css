@@ -1,0 +1,97 @@
+.offer-body {
+  background-color: #ebedee;
+  height: calc(100vh - 60px);
+}
+
+.offer-container {
+  display: flex;
+  gap: 30px;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 30px;
+  width: 1280px;
+}
+.offer-picture {
+  height: 600px;
+  object-fit: cover;
+}
+.offer-infos {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  width: 320px;
+}
+
+.offer-price {
+  color: #111;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.offer-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.offer-list span {
+  flex: 1 1;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.offer-list li {
+  display: flex;
+  padding: 2px 0;
+}
+
+.offer-list span:nth-child(odd) {
+  color: #999;
+}
+
+.offer-list span:nth-child(2n) {
+  color: #666;
+  font-weight: 700;
+}
+
+.offer-infos .divider {
+  background: hsla(0, 0%, 7%, 0.1);
+  display: block;
+  height: 1px;
+  width: 100%;
+}
+
+.offer-content .name {
+  font-weight: 700;
+}
+
+.offer-content .description {
+  color: #666;
+}
+
+.offer-avatar-username {
+  align-items: center;
+  display: flex;
+}
+
+.offer-avatar-username > img {
+  border-radius: 50%;
+  height: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+  width: 50px;
+}
+
+.offer-infos button {
+  background: #09b1ba;
+  border: 1px solid #09b1ba;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  height: 36px;
+  line-height: 36px;
+  margin-top: 32px;
+  padding: 0 16px;
+  width: 100%;
+}

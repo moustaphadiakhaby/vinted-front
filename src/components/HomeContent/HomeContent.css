@@ -1,0 +1,6 @@
+.home-card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px auto auto;
+  width: 1280px;
+}
