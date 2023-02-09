@@ -1,57 +1,75 @@
 import { useParams } from "react-router-dom";
 import "./Offer.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Offer = ({ data }) => {
-  //   const params = useParams();
-  //   console.log(params);
+const Offer = () => {
+  const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  //   Je récupère le params dans l'URL avec useParams
   const { id } = useParams();
-  console.log(id);
 
-  const offer = data.find((elem) => elem._id === id);
-  console.log(offer);
-  return (
-    <div className="offer-body">
-      <div className="offer-container">
-        <div className="offer-pictures">
-          <img
-            src={offer.product_image.secure_url}
-            alt=""
-            className="offer-picture"
-          />
-        </div>
-        <div className="offer-infos">
-          <div>
-            <span className="offer-price">{offer.product_price} €</span>
-            <ul className="offer-list">
-              {offer.product_details.map((desc) => {
-                console.log(desc);
-                return (
-                  <li>
-                    <span>{Object.keys(desc)}</span>
-                    <span>{Object.values(desc)}</span>
-                  </li>
-                );
-              })}
-            </ul>
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const response = await axios.get(
+          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+        );
+        setData(response.data);
+        setIsLoading(false);
+      };
+      fetchData();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [id]);
+
+  console.log(data);
+
+  if (!isLoading) {
+    return (
+      <div className="offer-body">
+        <div className="offer-container">
+          <div className="offer-pictures">
+            <img
+              src={data.product_image.secure_url}
+              alt=""
+              className="offer-picture"
+            />
           </div>
-          <div className="divider"></div>
-          <div className="offer-content">
-            <p className="name">{offer.product_name}</p>
-            <p className="description">{offer.product_description}</p>
-            <div className="offer-avatar-username">
-              {offer.owner.account.avatar && (
-                <img src={offer.owner.account.avatar.secure_url} alt="" />
-              )}
-              <span>{offer.owner.account.username}</span>
+          <div className="offer-infos">
+            <div>
+              <span className="offer-price">{data.product_price} €</span>
+              <ul className="offer-list">
+                {data.product_details.map((desc, index) => {
+                  return (
+                    <li key={index}>
+                      <span>{Object.keys(desc)}</span>
+                      <span>{Object.values(desc)}</span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
+            <div className="divider"></div>
+            <div className="offer-content">
+              <p className="name">{data.product_name}</p>
+              <p className="description">{data.product_description}</p>
+              <div className="offer-avatar-username">
+                {data.owner.account.avatar && (
+                  <img src={data.owner.account.avatar.secure_url} alt="" />
+                )}
+                <span>{data.owner.account.username}</span>
+              </div>
+            </div>
+            <button>Acheter</button>
           </div>
-          <button>Acheter</button>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <p>Loading ...</p>;
+  }
 };
 
 export default Offer;

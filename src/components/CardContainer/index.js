@@ -2,8 +2,6 @@ import "./CardContainer.css";
 import { Link } from "react-router-dom";
 
 const CardContainer = ({ details }) => {
-  console.log();
-
   return (
     <Link to={`/offer/${details._id}`} className="simplelink">
       <div className="card-container">
@@ -17,8 +15,15 @@ const CardContainer = ({ details }) => {
           <img src={details.product_image.secure_url} alt="" />
           <div className="card-price-size-brand">
             <span>{details.product_price} €</span>
-            <span>{details.product_details[1].TAILLE}</span>
-            <span>{details.product_details[0].MARQUE}</span>
+            {details.product_details.map((detail, index) => {
+              if (detail.TAILLE) {
+                return <span key={index}>{detail.TAILLE}</span>;
+              } else if (detail.MARQUE) {
+                return <span key={index}>{detail.MARQUE}</span>;
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>

@@ -1,0 +1,34 @@
+.modal-root {
+  overflow-y: hidden;
+  /* Pour que la modal prenne tout l'écran : */
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  /* Pour placer la modal tout en haut à gauche une fois en position relative */
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Mettre un background noir et transparent : */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-login {
+  background-color: white;
+  border-radius: 6px;
+  height: 400px;
+  padding: 10px 50px;
+  position: relative;
+}
+.exit {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #2cb1ba;
+  color: #fff;
+}

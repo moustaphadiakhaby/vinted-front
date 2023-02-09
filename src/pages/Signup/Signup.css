@@ -1,0 +1,89 @@
+.signup-container {
+  justify-content: center;
+  margin-top: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.signup-form > input {
+  border: none;
+  border-bottom: 1px solid #fcced3;
+  height: 35px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-family: vinted, sans-serif;
+  color: fieldtext;
+}
+
+button,
+input {
+  outline: none;
+}
+
+.signup-container,
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form {
+  margin: auto;
+  width: 275px;
+}
+
+.signup-login-error-message {
+  color: red;
+  font-size: 9px;
+}
+
+.checkbox-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.signup-form button {
+  background-color: #2cb1ba;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  height: 45px;
+  margin-top: 20px;
+  outline: none;
+  width: 100%;
+}
+
+button,
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.checkbox-container span {
+  color: #666;
+}
+
+.signup-form input[type="checkbox"] {
+  margin-right: 20px;
+  -webkit-transform: scale(2);
+  transform: scale(2);
+}
+
+.checkbox-container > p {
+  color: #999;
+  font-size: 12px;
+  text-align: left;
+}
+
+a {
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.signup-container a {
+  color: #2cb1ba;
+  font-size: 12px;
+}

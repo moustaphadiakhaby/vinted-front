@@ -1,34 +1,35 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 import Home from "./pages/Home";
-import Details from "./pages/Details";
 import Offer from "./pages/Offer";
+import Signup from "./pages/Signup";
 import Header from "./components/Header";
+import Login from "./pages/Login";
+import ModalSignup from "./components/ModalSignup";
+import ModalLogin from "./components/ModalLogin";
+import { useState } from "react";
 
 function App() {
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(
-        "https://lereacteur-vinted-api.herokuapp.com/offers"
-      );
-      setData(response.data);
-    };
-    fetchData();
-  }, []);
-
-  console.log(data);
+  const [visibleLog, setVisibleLog] = useState(false);
+  const [visibleSign, setVisibleSign] = useState(false);
+  console.log(visibleLog);
   return (
-    <Router>
-      <Header />
+    <Router className="App">
+      <Header
+        visibleLog={visibleLog}
+        setVisibleLog={setVisibleLog}
+        visibleSign={visibleSign}
+        setVisibleSign={setVisibleSign}
+      />
       <Routes>
-        <Route path="/" element={<Home data={data} />} />
-        <Route path="/details" element={<Details />} />
-        <Route path="/offer/:id" element={<Offer data={data.offers} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
+      {visibleSign && <ModalSignup setVisibleSign={setVisibleSign} />}
+      {visibleLog && <ModalLogin setVisibleLog={setVisibleLog} />}
     </Router>
   );
 }

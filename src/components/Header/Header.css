@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: auto;
+  margin: 0 auto;
   padding: 10px 0;
   width: 1280px;
 }
@@ -49,6 +49,16 @@
 .button-login-signup {
   background-color: #fff;
   color: #2cb1ba;
+}
+
+.button-logout {
+  background-color: #c2175b;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  height: 30px;
+  outline: none;
 }
 
 .button-sold {
