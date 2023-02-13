@@ -24,8 +24,6 @@ const Offer = () => {
     }
   }, [id]);
 
-  console.log(data);
-
   if (!isLoading) {
     return (
       <div className="offer-body">

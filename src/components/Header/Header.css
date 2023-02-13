@@ -24,6 +24,25 @@
   width: 590px;
 }
 
+.search-input-icon {
+  color: #bbb;
+  left: 7px;
+  position: absolute;
+  top: 12px;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+
 .header-logo {
   height: 40px;
 }
@@ -69,4 +88,45 @@
 .header-container > div:first-child,
 .header-logo {
   cursor: pointer;
+}
+
+.searchbar-bot {
+  margin-top: 25px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  margin-right: 25px;
+}
+
+.checkbox input[name="price"] {
+  display: none;
+}
+
+.checkbox .wrapper {
+  align-items: center;
+  background-color: #2cb1ba;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  height: 20px;
+  outline: none;
+  width: 42px;
+}
+
+.checkbox .knob {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #666;
+  border-radius: 100%;
+  font-weight: 700;
+  height: 16px;
+  left: 0;
+  position: relative;
+  transition: left 0.1s ease-in-out 0s;
+  width: 16px;
 }

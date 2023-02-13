@@ -1,23 +1,23 @@
-import "./Header.css";
-import logo from "../../img/logo.png";
-import { useNavigate } from "react-router-dom";
+import logo from "../img/logo.png";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import loupe from "../../img/loupe.svg";
+import SuperSimple from "./Slider";
+import loupe from "../img/loupe.svg";
 
-const Header = ({ params }) => {
-  const {
-    visibleLog,
-    setVisibleLog,
-    visibleSign,
-    setVisibleSign,
-
-    title,
-    setTitle,
-  } = params;
+const HomeHeader = ({
+  visibleLog,
+  setVisibleLog,
+  visibleSign,
+  setVisibleSign,
+  headCheck,
+  setHeadCheck,
+  title,
+  setTitle,
+  values,
+  setValues,
+}) => {
   const [activeToken, setActiveToken] = useState(false);
   const token = Cookies.get("token");
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -27,13 +27,13 @@ const Header = ({ params }) => {
     }
   }, [token]);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
     <div className="header-container">
-      <div
-        onClick={() => {
-          navigate("/");
-        }}
-      >
+      <div onClick={refreshPage}>
         <img src={logo} alt="" className="header-logo" />
       </div>
 
@@ -52,6 +52,24 @@ const Header = ({ params }) => {
           src={loupe}
           alt=""
         />
+        <div className="searchbar-bot">
+          <span style={{ marginRight: "10px" }}>Trier par prix :</span>
+          <span className="checkbox">
+            <div
+              onClick={() => {
+                setHeadCheck(!headCheck);
+              }}
+              className="wrapper"
+            >
+              <div style={{ left: headCheck && "24px" }} className="knob">
+                <span>{headCheck ? "⇣" : "⇡"}</span>
+              </div>
+            </div>
+          </span>
+          <span style={{ marginRight: "10px" }}>Prix entre :</span>
+
+          <SuperSimple values={values} setValues={setValues} />
+        </div>
       </div>
       {activeToken ? (
         <div>
@@ -95,4 +113,4 @@ const Header = ({ params }) => {
   );
 };
 
-export default Header;
+export default HomeHeader;

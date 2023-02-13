@@ -3,17 +3,39 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import tear from "../../img/tear.svg";
 import HomeContent from "../../components/HomeContent";
+import HomeHeader from "../../components/HomeHeader";
 
-const Home = () => {
+const Home = ({ params }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [pageCounter, setPageCounter] = useState(1);
+
+  const {
+    visibleLog,
+    setVisibleLog,
+    visibleSign,
+    setVisibleSign,
+    headCheck,
+    setHeadCheck,
+    title,
+    setTitle,
+    values,
+    setValues,
+  } = params;
+
+  let price = "price-asc";
+
+  if (headCheck) {
+    price = "price-desc";
+  } else {
+    price = "price-asc";
+  }
 
   useEffect(() => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?page=${pageCounter}&limit=10`
+          `https://lereacteur-vinted-api.herokuapp.com/offers?page=${pageCounter}&limit=10&sort=${price}&title=${title}&priceMin=${values[0]}&priceMax=${values[1]}`
         );
         setData(response.data);
         setIsLoading(false);
@@ -22,11 +44,23 @@ const Home = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [pageCounter]);
+  }, [pageCounter, price, title, values]);
 
   if (!isLoading) {
     return (
       <div className="Home">
+        <HomeHeader
+          visibleLog={visibleLog}
+          setVisibleLog={setVisibleLog}
+          visibleSign={visibleSign}
+          setVisibleSign={setVisibleSign}
+          headCheck={headCheck}
+          setHeadCheck={setHeadCheck}
+          title={title}
+          setTitle={setTitle}
+          values={values}
+          setValues={setValues}
+        />
         <div className="home-hero-bg-img">
           <img src={tear} alt="" className="home-hero-forme" />
 
