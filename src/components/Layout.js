@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header"; // ⚠️ verify it's the correct path
 
-const Layout = ({ params }) => {
+const Layout = ({ params, publishParams }) => {
   return (
     <>
-      <Header params={params} />
+      <Header params={params} publishParams={publishParams} />
       <Outlet />
     </>
   );

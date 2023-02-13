@@ -5,13 +5,12 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import loupe from "../../img/loupe.svg";
 
-const Header = ({ params }) => {
+const Header = ({ params, publishParams }) => {
   const {
     visibleLog,
     setVisibleLog,
     visibleSign,
     setVisibleSign,
-
     title,
     setTitle,
   } = params;
@@ -59,6 +58,7 @@ const Header = ({ params }) => {
             onClick={() => {
               Cookies.remove("token");
               setActiveToken(false);
+              navigate("/");
             }}
             className="button-logout"
           >
@@ -90,7 +90,16 @@ const Header = ({ params }) => {
           </button>
         </div>
       )}
-      <button className="button-sold header-button">Vends tes articles</button>
+      <button
+        className="button-sold header-button"
+        onClick={() => {
+          navigate("/publish");
+          publishParams.setPub(true);
+          console.log(publishParams.pub);
+        }}
+      >
+        Vends tes articles
+      </button>
     </div>
   );
 };

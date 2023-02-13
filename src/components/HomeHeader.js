@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import SuperSimple from "./Slider";
 import loupe from "../img/loupe.svg";
+import { useNavigate } from "react-router-dom";
 
 const HomeHeader = ({
   visibleLog,
@@ -15,9 +16,11 @@ const HomeHeader = ({
   setTitle,
   values,
   setValues,
+  publishParams,
 }) => {
   const [activeToken, setActiveToken] = useState(false);
   const token = Cookies.get("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -108,7 +111,16 @@ const HomeHeader = ({
           </button>
         </div>
       )}
-      <button className="button-sold header-button">Vends tes articles</button>
+      <button
+        className="button-sold header-button"
+        onClick={() => {
+          navigate("/publish");
+          publishParams.setPub(true);
+          console.log(publishParams.pub);
+        }}
+      >
+        Vends tes articles
+      </button>
     </div>
   );
 };

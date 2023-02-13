@@ -9,6 +9,7 @@ import ModalSignup from "./components/ModalSignup";
 import ModalLogin from "./components/ModalLogin";
 import { useState } from "react";
 import Layout from "./components/Layout";
+import Publish from "./pages/Publish";
 
 function App() {
   const [visibleLog, setVisibleLog] = useState(false);
@@ -16,6 +17,7 @@ function App() {
   const [headCheck, setHeadCheck] = useState(false);
   const [title, setTitle] = useState("");
   const [values, setValues] = useState([0, 100]);
+  const [pub, setPub] = useState(false);
 
   const params = {
     visibleLog,
@@ -30,14 +32,28 @@ function App() {
     setValues,
   };
 
+  const publishParams = { pub, setPub };
+
   return (
     <Router className="App">
       <Routes>
-        <Route path="/" element={<Home params={params} />} />
-        <Route element={<Layout params={params} />}>
+        <Route
+          path="/"
+          element={<Home params={params} publishParams={publishParams} />}
+        />
+        <Route
+          element={<Layout params={params} publishParams={publishParams} />}
+        >
           <Route path="/offer/:id" element={<Offer />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login publishParams={publishParams} />}
+          />
+          <Route
+            path="/publish"
+            element={<Publish publishParams={publishParams} />}
+          />
         </Route>
       </Routes>
 

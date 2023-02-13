@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import "./ModalSignup.css";
 
@@ -10,23 +10,28 @@ const ModalSignup = ({ setVisibleSign }) => {
   const [password, setPassword] = useState("");
   const [check, setCheck] = useState(false);
   const [message, setMessage] = useState("");
+  const [picture, setPicture] = useState();
+  const [preview, setPreview] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const account = {
-        username: username,
-        email: mail,
-        password: password,
-        newsletter: check,
-      };
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", mail);
+      formData.append("password", password);
+      formData.append("newsletter", check);
+      if (picture) {
+        formData.append("avatar", picture);
+      }
+
       const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        account
+        formData
       );
       const token = response.data.token;
       Cookies.set("token", token, { expires: 1 });
-      console.log(response.data.token);
+
       setVisibleSign(false);
       document.body.style.overflow = "auto";
     } catch (error) {
@@ -34,6 +39,18 @@ const ModalSignup = ({ setVisibleSign }) => {
       console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    if (!picture) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(picture);
+    setPreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [picture]);
 
   return (
     <div
@@ -60,6 +77,35 @@ const ModalSignup = ({ setVisibleSign }) => {
           X
         </button>
         <form onSubmit={handleSubmit} className="signup-form">
+          {!preview && (
+            <label htmlFor="file" className="label-file label-signup">
+              <span className="input-sign">+</span>
+              <span>Ajoute une photo</span>
+            </label>
+          )}
+
+          {preview && (
+            <div>
+              <img className="avatar-pic" src={preview} alt="" />
+              <div
+                onClick={() => {
+                  setPreview(undefined);
+                  setPicture(undefined);
+                }}
+                className="remove-avatar"
+              >
+                x
+              </div>
+            </div>
+          )}
+          <input
+            type="file"
+            id="file"
+            className="input-file"
+            onChange={(e) => {
+              setPicture(e.target.files[0]);
+            }}
+          />
           <input
             onChange={(e) => {
               setUsername(e.target.value);
@@ -81,7 +127,6 @@ const ModalSignup = ({ setVisibleSign }) => {
           )}
           <input
             onChange={(e) => {
-              console.log(e.target.value);
               setPassword(e.target.value);
             }}
             value={password}

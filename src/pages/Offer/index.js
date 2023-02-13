@@ -35,6 +35,7 @@ const Offer = () => {
               className="offer-picture"
             />
           </div>
+
           <div className="offer-infos">
             <div>
               <span className="offer-price">{data.product_price} €</span>

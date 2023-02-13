@@ -22,7 +22,6 @@ const ModalLogin = ({ setVisibleLog }) => {
       );
       const token = response.data.token;
       Cookies.set("token", token, { expires: 1 });
-      console.log(response.data.token);
       setVisibleLog(false);
       document.body.style.overflow = "auto";
     } catch (error) {

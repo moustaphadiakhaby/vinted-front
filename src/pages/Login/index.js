@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
-const Login = () => {
+const Login = ({ publishParams }) => {
   const navigate = useNavigate();
 
   const [mail, setMail] = useState("");
@@ -23,8 +23,12 @@ const Login = () => {
       );
       const token = response.data.token;
       Cookies.set("token", token, { expires: 1 });
-      console.log(response.data.token);
       navigate("/");
+      if (publishParams.pub) {
+        navigate("/publish");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error.message);
       setMessage("Mauvais email et/ou mot de passe");
@@ -32,10 +36,13 @@ const Login = () => {
   };
 
   const token = Cookies.get("token");
-  console.log(token);
 
   if (token) {
-    return <Navigate to="/" />;
+    if (publishParams.pub) {
+      return <Navigate to="/publish" />;
+    } else {
+      return <Navigate to="/" />;
+    }
   } else {
     return (
       <div className="signup-container">

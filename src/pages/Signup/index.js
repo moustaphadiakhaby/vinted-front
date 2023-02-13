@@ -27,7 +27,6 @@ const Signup = () => {
       );
       const token = response.data.token;
       Cookies.set("token", token, { expires: 1 });
-      console.log(response.data.token);
       navigate("/");
     } catch (error) {
       setMessage("Cet email existe déjà");
@@ -65,7 +64,6 @@ const Signup = () => {
           )}
           <input
             onChange={(e) => {
-              console.log(e.target.value);
               setPassword(e.target.value);
             }}
             value={password}

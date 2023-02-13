@@ -5,7 +5,7 @@ import tear from "../../img/tear.svg";
 import HomeContent from "../../components/HomeContent";
 import HomeHeader from "../../components/HomeHeader";
 
-const Home = ({ params }) => {
+const Home = ({ params, publishParams }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [pageCounter, setPageCounter] = useState(1);
@@ -60,6 +60,7 @@ const Home = ({ params }) => {
           setTitle={setTitle}
           values={values}
           setValues={setValues}
+          publishParams={publishParams}
         />
         <div className="home-hero-bg-img">
           <img src={tear} alt="" className="home-hero-forme" />
