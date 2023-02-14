@@ -116,7 +116,6 @@ const HomeHeader = ({
         onClick={() => {
           navigate("/publish");
           publishParams.setPub(true);
-          console.log(publishParams.pub);
         }}
       >
         Vends tes articles

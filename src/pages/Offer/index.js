@@ -2,12 +2,14 @@ import { useParams } from "react-router-dom";
 import "./Offer.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Offer = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -61,13 +63,23 @@ const Offer = () => {
                 <span>{data.owner.account.username}</span>
               </div>
             </div>
-            <button>Acheter</button>
+            <button
+              onClick={() => {
+                navigate("/payment", {
+                  state: {
+                    title: data.product_name,
+                    price: data.product_price,
+                    id: id,
+                  },
+                });
+              }}
+            >
+              Acheter
+            </button>
           </div>
         </div>
       </div>
     );
-  } else {
-    return <p>Loading ...</p>;
   }
 };
 

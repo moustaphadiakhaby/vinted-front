@@ -24,10 +24,10 @@
   height: 25px;
   width: 25px;
   background-color: #2cb1ba;
-  top: 105px;
   color: white;
   cursor: pointer;
   line-height: 25px;
-  position: absolute;
-  left: 215px;
+  position: relative;
+  left: 160px;
+  bottom: 120px;
 }

@@ -10,6 +10,7 @@ import ModalLogin from "./components/ModalLogin";
 import { useState } from "react";
 import Layout from "./components/Layout";
 import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
 
 function App() {
   const [visibleLog, setVisibleLog] = useState(false);
@@ -45,7 +46,10 @@ function App() {
           element={<Layout params={params} publishParams={publishParams} />}
         >
           <Route path="/offer/:id" element={<Offer />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/signup"
+            element={<Signup setVisibleSign={setVisibleSign} />}
+          />
           <Route
             path="/login"
             element={<Login publishParams={publishParams} />}
@@ -54,6 +58,7 @@ function App() {
             path="/publish"
             element={<Publish publishParams={publishParams} />}
           />
+          <Route path="/payment" element={<Payment />} />
         </Route>
       </Routes>
 

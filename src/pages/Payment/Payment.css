@@ -1,0 +1,89 @@
+.Payment {
+  background: #ebedee;
+  height: calc(100vh - 59px);
+}
+
+.payment-container {
+  margin: 0 auto;
+  padding: 36px 20px;
+  width: 600px;
+}
+
+.payment-card {
+  background: #fff;
+}
+
+.payment-card > .title {
+  color: #999;
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 24px 24px 8px;
+}
+
+.payment-card .content {
+  padding: 24px;
+  text-align: justify;
+}
+
+.payment-card .divider {
+  background: hsla(0, 0%, 7%, 0.1);
+  display: block;
+  height: 1px;
+  margin: 24px 0;
+  width: 100%;
+}
+
+.payment-card ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-card li {
+  align-items: center;
+  color: #666;
+  display: grid;
+  font-size: 16px;
+  grid: auto/1fr auto;
+  line-height: 22px;
+  padding: 4px 0;
+}
+
+.payment-card .content .bold {
+  font-weight: 700;
+}
+
+.payment-card li.bold {
+  color: #111;
+  font-weight: 700;
+}
+
+.StripeElement,
+.payment-card input {
+  background: #fff;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgb(50 50 93 / 15%), 0 1px 0 rgb(0 0 0 / 2%);
+  display: block;
+  font-family: Source Code Pro, monospace;
+  font-size: 1em;
+  margin: 10px 0 20px;
+  outline: 0;
+  padding: 10px 14px;
+}
+
+.payment-card .pay-button {
+  background: #00c06d;
+  border: 1px solid;
+  border-color: #00c06d;
+  border-radius: 4px;
+  color: #fff;
+  display: block;
+  font-size: 16px;
+  height: 44px;
+  line-height: 22px;
+  margin-top: 8px;
+  padding: 0 14px;
+  width: 100%;
+}

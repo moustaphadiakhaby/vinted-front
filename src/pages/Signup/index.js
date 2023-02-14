@@ -1,33 +1,39 @@
-import "./Signup.css";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import "./Signup.css";
 
-const Signup = () => {
-  const navigate = useNavigate();
+const Signup = ({ setVisibleSign }) => {
   const [username, setUsername] = useState("");
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [check, setCheck] = useState(false);
   const [message, setMessage] = useState("");
+  const [picture, setPicture] = useState();
+  const [preview, setPreview] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const account = {
-        username: username,
-        email: mail,
-        password: password,
-        newsletter: check,
-      };
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", mail);
+      formData.append("password", password);
+      formData.append("newsletter", check);
+      if (picture) {
+        formData.append("avatar", picture);
+      }
+
       const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        account
+        formData
       );
       const token = response.data.token;
       Cookies.set("token", token, { expires: 1 });
-      navigate("/");
+
+      setVisibleSign(false);
+      document.body.style.overflow = "auto";
     } catch (error) {
       setMessage("Cet email existe déjà");
       console.log(error.message);
@@ -36,6 +42,18 @@ const Signup = () => {
 
   const token = Cookies.get("token");
 
+  useEffect(() => {
+    if (!picture) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(picture);
+    setPreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [picture]);
+
   if (token) {
     return <Navigate to="/" />;
   } else {
@@ -43,6 +61,35 @@ const Signup = () => {
       <div className="signup-container">
         <h2>S'inscrire</h2>
         <form onSubmit={handleSubmit} className="signup-form">
+          {!preview && (
+            <label htmlFor="file" className="label-file label-signup">
+              <span className="input-sign">+</span>
+              <span>Ajoute une photo</span>
+            </label>
+          )}
+
+          {preview && (
+            <div className="avatar-box">
+              <img className="avatar-pic" src={preview} alt="" />
+              <div
+                onClick={() => {
+                  setPreview(undefined);
+                  setPicture(undefined);
+                }}
+                className="remove-avatar2"
+              >
+                x
+              </div>
+            </div>
+          )}
+          <input
+            type="file"
+            id="file"
+            className="input-file"
+            onChange={(e) => {
+              setPicture(e.target.files[0]);
+            }}
+          />
           <input
             onChange={(e) => {
               setUsername(e.target.value);

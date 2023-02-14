@@ -71,6 +71,7 @@ const Publish = ({ publishParams }) => {
   }, [picture]);
 
   if (!token) {
+    publishParams.setPub(true);
     return <Navigate to="/login" />;
   } else {
     return (

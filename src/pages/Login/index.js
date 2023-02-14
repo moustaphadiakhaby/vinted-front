@@ -26,6 +26,7 @@ const Login = ({ publishParams }) => {
       navigate("/");
       if (publishParams.pub) {
         navigate("/publish");
+        publishParams.setPub(false);
       } else {
         navigate("/");
       }
